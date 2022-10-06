@@ -1,22 +1,30 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Oct  6 20:55:33 2022
 
-@author: as292
+"""
+----------------------------------------------------
+------ Author: Ayman Saleh        ------------------ 
+------ Date  : 6/OCT/2022         ------------------ 
+------ Version: V.1.0.1           ------------------ 
+------ Type   : RCC configuration Tool    ---------- 
+----------------------------------------------------
+
 """
 
+#Register List Names For RCC Should Match the Register Names in source Fils in C for correct
 regList = ["RCC_AHBENR", "RCC_APB2ENR", "RCC_APB1ENR"]
-        
+
+#Set holds the corresponding bits in AHB bus clock reegister for peripherals
 setAHB  = ('0','1','2','4','6','8','10')
 
+#Set holds the corresponding bits in APB1 bus clock reegister for peripherals
 setAPB1 = ('0 ','1 ','2 ','3 ','4 ','5 ','6 ','7 ','8 ','11'
            ,'14','15','17','18','19','20','21','22','23','25'
            ,'27','28','29')
 
+#Set holds the corresponding bits in APB2 bus clock reegister for peripherals
 setAPB2 = ('0 ','2 ','3 ','4 ','5 ','6 ','7 ',
            '8 ','9 ','10','11','12','13','14',
            '15','19','20','21')
-
+#   System Clock Function
 def RCC_SystemClock():
         
     print ("------------System Clock ------------")
@@ -34,7 +42,7 @@ def RCC_SystemClock():
     print("RCC clock Type:")
     print("1. High Speed External Crystal")
     print("2. High Speed External RC")
-    print("3. High Speed Internal (8MHz)")
+    print("3. High Speed Internal ")
     print("4. PLL enable ")
     
     rccClockType = str(input("Type: "))
@@ -75,6 +83,7 @@ def RCC_SystemClock():
             rcc.write("\n\tSET_BIT(RCC_CR, RCC_CR_HSE_ON);")
         else :
             print("Invalid RCC PLL INPUT ")
+            
         # RCC_PLL_MUL_VAL parameter
         print("PLL Multiplication Factor :\n(take care not to exceed the maximum processor Clock)")
         rccPLL_mull = str(input("Value (2:16): "))
@@ -91,6 +100,7 @@ def RCC_SystemClock():
     rcc.write("\n}")
     rcc.close();
     
+#   Disable Clock to peripherals
 def RCC_disableClockPerephiral ():
     print("------------Disable Clock For Prepirals------------")
     rcc = open("RCC_config.c", 'a')
@@ -182,6 +192,7 @@ def RCC_disableClockPerephiral ():
             rcc.close();
             break
 
+#   Enable Clock to peripherals
 def RCC_enableClockPerephiral ():
     print("------------Enable Clock For Prepirals------------")
     print("Enable Clock for peripherals:")
@@ -274,5 +285,3 @@ def RCC_enableClockPerephiral ():
             rcc.write("\n\n}");
             rcc.close();
             break
-
-

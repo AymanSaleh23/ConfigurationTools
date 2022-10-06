@@ -1,10 +1,17 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Oct  6 22:23:16 2022
+----------------------------------------------------
+------ Author: Ayman Saleh        ------------------ 
+------ Date  : 6/OCT/2022         ------------------ 
+------ Version: V.1.0.1           ------------------ 
+------ Type   : Main configuration Tool   ---------- 
+----------------------------------------------------
 
-@author: as292
 """
 
+#   inport RCC configuration Module
 import RCC_configTool
 
+
 RCC_configTool.RCC_SystemClock()
+RCC_configTool.RCC_enableClockPerephiral()
+RCC_configTool.RCC_disableClockPerephiral()
