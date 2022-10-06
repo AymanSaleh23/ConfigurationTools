@@ -79,12 +79,8 @@ rcc.close();
 
 print("------------Enable Clock For Prepirals------------")
 
-dictReg = {
-        "RCC_AHBENR":		'*((volatile u32*) (0x40021014))',
-        "RCC_APB2ENR":		'*((volatile u32*) (0x40021018))',
-        "RCC_APB1ENR":		'*((volatile u32*) (0x4002101C))'
-
-    }
+regList = ["RCC_AHBENR", "RCC_APB2ENR", "RCC_APB1ENR"]
+        
 setAHB  = ('0','1','2','4','6','8','10')
 
 setAPB1 = ('0 ','1 ','2 ','3 ','4 ','5 ','6 ','7 ','8 ','11'
@@ -115,7 +111,7 @@ while (True):
     choise = str(input("Peripheral ID: ")).upper()
     
     if choise != 'X':
-        rcc.write("\n\tSET_BIT( "+ dictReg["RCC_AHBENR"]  +" ,"+ setAHB[int(choise)] +");")
+        rcc.write("\n\tSET_BIT( "+ regList[0]  +" ,"+ setAHB[int(choise)] +");")
     elif choise == 'X':
         break
 
@@ -150,7 +146,7 @@ while (True):
     choise = str(input("Peripheral ID: ")).upper()
     
     if choise != 'X' and int(choise)<=22:
-        rcc.write("\n\tSET_BIT( "+ dictReg["RCC_APB1ENR"]  +","+ setAPB1[int(choise)] +");")
+        rcc.write("\n\tSET_BIT( "+ regList[1]   +","+ setAPB1[int(choise)] +");")
     elif choise == 'X':
         break
     
@@ -180,7 +176,7 @@ while (True):
     choise = str(input("Peripheral ID: ")).upper()
     
     if choise != 'X' and int(choise)<=17:
-        rcc.write("\n\tSET_BIT( "+ dictReg["RCC_APB2ENR"]  +","+ setAPB2[int(choise)] +");")
+        rcc.write("\n\tSET_BIT( "+ regList[2]   +","+ setAPB2[int(choise)] +");")
     elif choise == 'X':
         rcc.write("\n\n}");
         rcc.close();
@@ -206,7 +202,7 @@ while (True):
     choise = str(input("Peripheral ID: ")).upper()
     
     if choise != 'X':
-        rcc.write("\n\tCLR_BIT(  0	,"+ setAHB[int(choise)] +");")
+        rcc.write("\n\tCLR_BIT( "+ regList[0] + "	,"+ setAHB[int(choise)] +");")
     elif choise == 'X':
         break
 
@@ -241,7 +237,7 @@ while (True):
     choise = str(input("Peripheral ID: ")).upper()
     
     if choise != 'X' and int(choise)<=22:
-        rcc.write("\n\tCLR_BIT( "+ dictReg["RCC_APB1ENR"]  +","+ setAPB1[int(choise)] +");")
+        rcc.write("\n\tCLR_BIT( "+ regList[1]   +","+ setAPB1[int(choise)] +");")
     elif choise == 'X':
         break
     
@@ -271,7 +267,7 @@ while (True):
     choise = str(input("Peripheral ID: ")).upper()
     
     if choise != 'X' and int(choise)<=17:
-        rcc.write("\n\tCLR_BIT( "+ dictReg["RCC_APB2ENR"]  +","+ setAPB2[int(choise)] +");")
+        rcc.write("\n\tCLR_BIT( "+ regList[2]   +","+ setAPB2[int(choise)] +");")
     elif choise == 'X':
         rcc.write("\n\n}");
         rcc.close();
